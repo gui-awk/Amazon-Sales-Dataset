@@ -2,33 +2,48 @@ import numpy as np
 import pandas as pd 
 import os
 
-df = pd.read_csv('amazon.csv')
+df = pd.read_csv('amazon.csv') 
 
-df.columns
+df.columns #checking
 
-#df.info()
+#df.info() #checking
 
-#df.describe()
+#df.describe() #checking
 
-df = df.dropna()
+df = df.dropna() #handling NaN  values
 
-df.isnull().sum()
+df.isnull().sum() #sum null values
 
 
-#processando rating count
+#processing rating count
 for i in df['rating_count'].values:
-    print(i,'|',int(i.replace(',','')))
+    print(i,'|',int(i.replace(',',''))) #print rating count values with | and replacing , for better visualization 
     break
 
-rating_count = []
+rating_count = []  #creating a rating count list to put i values inside the list
 for i in df['rating_count'].values:
     rating_count.append(int(i.replace(',','')))
 
 df['rating_count'] = rating_count
 
-#df.head()
 
-filtrando = df.query('rating_count >= 24269')
-print(filtrando)
-filtrando.head()
+filter_rating_count = df.query('rating_count <= 24269').sort_values(by=['rating_count'], ascending=True) #first time using sort_values
+
+filter_rating_count.head()
+
+
+#same process in discounted_price
+
+for i in df['discounted_price'].values:
+    print(i,'|',float(i[1:].replace(',',''))) #IndexError: invalid index to scalar variable.
+    break
+
+discounted_price = []
+for i in df['discounted_price'].values:
+    discounted_price.append(float(i[1:].replace(',',''))) #float for ,
+
+df['discounted_price'] = discounted_price
+
+filter_discounted_price = df.query('discounted_price >= 300')
+filter_discounted_price.head()
 
