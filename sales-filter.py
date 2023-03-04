@@ -65,7 +65,7 @@ for i in unique_category:
     for j in df.values:
         if(i in j[2]):
             c += 1
-    data.append([i, c])  # [[Categoria, quantidade de produtos na categoria]]
+    data.append([i, c])  # [[Categoria, quantidade de produtos em cada categoria]] / [[Category, quantity of products on each category]]
 
 #sort
 
