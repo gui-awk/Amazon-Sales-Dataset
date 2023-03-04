@@ -6,6 +6,7 @@ df = pd.read_csv('amazon.csv')
 
 df.columns #checking
 
+df.values
 #df.info() #checking
 
 #df.describe() #checking
@@ -40,7 +41,7 @@ for i in df['discounted_price'].values:
 
 discounted_price = []
 for i in df['discounted_price'].values:
-    discounted_price.append(float(i[1:].replace(',',''))) #float for ,
+    discounted_price.append(float(i[1:].replace(',',''))) #float numbers
 
 df['discounted_price'] = discounted_price
 
@@ -60,10 +61,10 @@ unique_category = list(set(unique_category))
 #quantidade       
 
 data = []
-for i in unique_category:
+for i in unique_category: # each "i" value is equal one category and we set "c" as zero
     c = 0
-    for j in df.values:
-        if(i in j[2]):
+    for j in df.values: #looping through all the dataframe setting the variable as "j"
+        if(i in j[2]): #search for a category and count them through "c"
             c += 1
     data.append([i, c])  # [[Categoria, quantidade de produtos em cada categoria]] / [[Category, quantity of products on each category]]
 
