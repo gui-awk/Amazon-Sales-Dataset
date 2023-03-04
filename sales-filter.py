@@ -47,3 +47,27 @@ df['discounted_price'] = discounted_price
 filter_discounted_price = df.query('discounted_price >= 300')
 filter_discounted_price.head()
 
+#unique category
+
+unique_category = []
+
+for i in df['category'].values:
+    unique_category += i.split('|')
+
+
+unique_category = list(set(unique_category))
+
+#quantidade       
+
+data = []
+for i in unique_category:
+    c = 0
+    for j in df.values:
+        if(i in j[2]):
+            c += 1
+    data.append([i, c])  # [[Categoria, quantidade de produtos na categoria]]
+
+#sort
+
+df_pr = pd.DataFrame(data, columns=['category', 'frequency'])
+df_pr.sort_values(by='frequency', ascending=False)
